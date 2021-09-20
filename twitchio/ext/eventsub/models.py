@@ -30,7 +30,10 @@ logger = logging.getLogger("twitchio.ext.eventsub")
 
 def _parse_datetime(time: str) -> datetime.datetime:
     # Exemple time: 2021-06-19T04:12:39.407371633Z
-    return datetime.datetime.strptime(time[:26], "%Y-%m-%dT%H:%M:%S.%f")
+    if len(time) == 20:
+        return datetime.datetime.strptime(time[:19], "%Y-%m-%dT%H:%M:%S")
+    else:
+        return datetime.datetime.strptime(time[:26], "%Y-%m-%dT%H:%M:%S.%f")
 
 
 class EmptyObject:
